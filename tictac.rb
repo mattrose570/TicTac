@@ -249,10 +249,4 @@ end
 
 # End of Class
 #-------------------------------------------------------------------------------------------------------------
-# Start of Program
 
-thisone = TicTac.new
-
-#thisone.printBoard
-#thisone.game_loop
-thisone.game_loop

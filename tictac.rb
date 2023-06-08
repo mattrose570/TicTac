@@ -1,3 +1,5 @@
+require 'colorize'
+
 class TicTac
     class Player
         # Adds setter method. allows the name to be changed
@@ -25,14 +27,15 @@ class TicTac
     end
 
     def printBoard
+        puts("The Board:".colorize(:mode => :italic))
         @the_board.each do |square|
             square.each do |innerArr|
                 if innerArr == 0
                     print "[ ]"
                     
-                elsif innerArr == "x"
+                elsif innerArr == "X"
                     print "[X]"
-                elsif innerArr == "o"
+                elsif innerArr == "O"
                     print "[O]"
 
                 else  
@@ -45,27 +48,31 @@ class TicTac
 
     def player1wincon?
         # Player 1 win conditions
+
+        player1sym = "X".colorize(:color => :red, :mode => :bold)
         
-        if @the_board[0][0..2].all? {|num| num == "x"}
+        if @the_board[0][0..2].all? {|num| num == player1sym}
             return true
         
-        elsif @the_board[1][0..2].all? {|num| num == "x"}
+        elsif @the_board[1][0..2].all? {|num| num == player1sym}
             return true
         
-        elsif @the_board[2][0..2].all? {|num| num == "x"}
+        elsif @the_board[2][0..2].all? {|num| num == player1sym}
             return true
 
-        elsif @the_board[0][0] == "x" && @the_board[1][0] == "x" && @the_board[2][0] == "x"
+        elsif @the_board[0][0] == player1sym && @the_board[1][0] == player1sym && @the_board[2][0] == player1sym
             return true
-        elsif @the_board[0][1] == "x" && @the_board[1][1] == "x" && @the_board[2][1] == "x"
-            return true
-            elsif @the_board[0][2] == "x" && @the_board[1][2] == "x" && @the_board[2][2] == "x"
-                return true
         
-        elsif @the_board[0][0] == "x" && @the_board[1][1] == "x" && @the_board[2][2] == "x"
+        elsif @the_board[0][1] == player1sym && @the_board[1][1] == player1sym && @the_board[2][1] == player1sym
+            return true
+        
+        elsif @the_board[0][2] == player1sym && @the_board[1][2] == player1sym && @the_board[2][2] == player1sym
+            return true
+        
+        elsif @the_board[0][0] == player1sym && @the_board[1][1] == player1sym && @the_board[2][2] == player1sym
             return true
 
-        elsif @the_board[0][2] == "x" && @the_board[1][1] == "x" && @the_board[2][0] == "x"
+        elsif @the_board[0][2] == player1sym && @the_board[1][1] == player1sym && @the_board[2][0] == player1sym
             return true
 
         else   
@@ -74,31 +81,42 @@ class TicTac
         # of  statements
         end
 
-    #  of player1wincon?
+    #  End of player1wincon?
     end
 
     def player2wincon?
-        # Player 1 win conditions
+        # Player 2 win conditions
+
+        player2sym = "O".colorize(:color => :blue, :mode => :bold)
         
-        if @the_board[0][0..2].all? {|num| num == "o"}
+        if @the_board[0][0..2].all? {|num| num == player2sym}
             return true
         
-        elsif @the_board[1][0..2].all? {|num| num == "o"}
+        elsif @the_board[1][0..2].all? {|num| num == player2sym}
             return true
         
-        elsif @the_board[2][0..2].all? {|num| num == "o"}
-            return true
-        
-        elsif @the_board[0][0] == "o" && @the_board[1][1] == "o" && @the_board[2][2] == "o"
+        elsif @the_board[2][0..2].all? {|num| num == player2sym}
             return true
 
-        elsif @the_board[0][2] == "o" && @the_board[1][1] == "o" && @the_board[2][0] == "o"
+        elsif @the_board[0][0] == player2sym && @the_board[1][0] == player2sym && @the_board[2][0] == player2sym
+            return true
+        
+        elsif @the_board[0][1] == player2sym && @the_board[1][1] == player2sym && @the_board[2][1] == player2sym
+            return true
+        
+        elsif @the_board[0][2] == player2sym && @the_board[1][2] == player2sym && @the_board[2][2] == player2sym
+            return true
+        
+        elsif @the_board[0][0] == player2sym && @the_board[1][1] == player2sym && @the_board[2][2] == player2sym
             return true
 
-        else 
+        elsif @the_board[0][2] == player2sym && @the_board[1][1] == player2sym && @the_board[2][0] == player2sym
+            return true
+
+        else   
             return false
         
-        # statements
+        # of  statements
         end
     # end of player2wincon?
     end
@@ -115,20 +133,21 @@ class TicTac
     end
 
     def player1_turn
-        puts("Your symbol is X")
-        puts "#{@player1.name}'s turn. Enter the number of the tile you'd like to claim"
+        print("#{@player1.name}'s symbol is ")
+        print("X".colorize(:color => :red, :mode => :bold)); puts()
+        puts ("Enter the number of the tile you'd like to claim")
         
         userChoice = gets.chomp.to_i
         
         if (userChoice >= 1 && userChoice <= 9) && !@moves.include?(userChoice)
             if userChoice == 1 || userChoice == 2 || userChoice == 3
-                @the_board[0][userChoice - 1] = "x"
+                @the_board[0][userChoice - 1] = "X".colorize(:color => :red, :mode => :bold)
             
             elsif userChoice == 4 || userChoice == 5 || userChoice == 6
-                @the_board[1][userChoice - 4] = "x"
+                @the_board[1][userChoice - 4] = "X".colorize(:color => :red, :mode => :bold)
                 
             elsif userChoice == 7 || userChoice == 8 || userChoice == 9
-                @the_board[2][userChoice - 7] = "x"
+                @the_board[2][userChoice - 7] = "X".colorize(:color => :red, :mode => :bold)
             end
             
             @turn += 1
@@ -151,20 +170,21 @@ class TicTac
     end
 
     def player2_turn
-        puts("Your symbol is O")
-        puts "#{@player2.name}'s turn. Enter the number of the tile you'd like to claim"
+        print("#{@player2.name}'s symbol is ")
+        print("O".colorize(:color => :blue, :mode => :bold)); puts()
+        puts("Enter the number of the tile you'd like to claim")
         
         userChoice = gets.chomp.to_i
         
         if (userChoice >= 1 && userChoice <= 9) && !@moves.include?(userChoice)
             if userChoice == 1 || userChoice == 2 || userChoice == 3
-                @the_board[0][userChoice - 1] = "o"
+                @the_board[0][userChoice - 1] = "O".colorize(:color => :blue, :mode => :bold)
             
             elsif userChoice == 4 || userChoice == 5 || userChoice == 6
-                @the_board[1][userChoice - 4] = "o"
+                @the_board[1][userChoice - 4] = "O".colorize(:color => :blue, :mode => :bold)
                 
             elsif userChoice == 7 || userChoice == 8 || userChoice == 9
-                @the_board[2][userChoice - 7] = "o"
+                @the_board[2][userChoice - 7] = "O".colorize(:color => :blue, :mode => :bold)
             end
             
             @turn += 1
@@ -262,6 +282,10 @@ class TicTac
             puts("#{@player2.name} has won.")
 
         end
+
+        @the_board = [[1, 2, 3],
+                      [4, 5, 6],
+                      [7, 8, 9]]
 
         continue_game? ? game_loop : exit
 
